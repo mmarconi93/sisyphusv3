@@ -1,12 +1,12 @@
-:root{
-  --bg:#111216;
-  --bg2:#0d0f14;
-  --ink:#e7e7ea;
-  --muted:#a1a6ad;
-  --neon:#b184ff;
-  --neon-strong:#a259ff;
-  --card:#161922;
-  --ring:rgba(178,132,255,.32);
+:root {
+  --bg: #f7f7f5;
+  --bg2: #f3f3f0;
+  --ink: #333333;
+  --muted: #666666;
+  --neon: #6c5ce7;
+  --neon-strong: #4b3bbd;
+  --card: #ffffff;
+  --ring: rgba(108, 92, 231, 0.25);
 }
 *{box-sizing:border-box}
 html,body{height:100%}
