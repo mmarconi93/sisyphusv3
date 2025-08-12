@@ -46,19 +46,29 @@ body:after{
 .menu span{width:22px; height:2px; background:var(--ink); display:block; border-radius:2px}
 
 /* Drawer from right */
-.drawer.right{
-  position:fixed; inset:0 0 0 auto; width:min(300px, 85vw);
-  transform:translateX(100%);
-  background:rgba(13,15,20,.96);
-  border-left:1px solid rgba(255,255,255,.08);
-  box-shadow: 0 0 40px rgba(0,0,0,.5);
+.drawer.right {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(300px, 85vw);
+  transform: translateX(100%);
+  background: var(--bg); /* match the light background */
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.15);
   transition: transform .28s ease;
-  z-index:4;
-  padding:clamp(16px, 3vw, 24px);
+  z-index: 4;
+  padding: clamp(16px, 3vw, 24px);
 }
-.drawer-nav{ display:grid; gap:14px; margin-top:10px }
-.drawer-nav a{ color:var(--ink); text-decoration:none; font-weight:600; letter-spacing:.04em }
-.drawer-nav a:hover{ color:var(--neon) }
+
+.drawer-nav a {
+  color: var(--ink); /* charcoal text */
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: .04em;
+}
+
+.drawer-nav a:hover {
+  color: var(--neon); /* subtle purple hover */
+}
 
 .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.35);
   opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:3; }
