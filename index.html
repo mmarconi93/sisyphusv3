@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Mal Marconi — Portfolio</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+
+</head>
+<body>
+  <canvas id="matrix" class="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Fixed hamburger + drawer (right side) -->
+  <button class="menu edge right" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+    <span></span><span></span><span></span>
+  </button>
+  <aside id="drawer" class="drawer right" aria-hidden="true">
+    <nav class="drawer-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </aside>
+  <div class="scrim" data-close></div>
+
+  <header class="site-header container">
+    <div class="page-indicator" aria-hidden="true">
+      <span class="current">1</span>
+      <span class="dash">—</span>
+      <span>3</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container" id="home" aria-label="Hero">
+      <div class="hero-left">
+        <h1 class="brand">
+          <span class="line">Mal</span>
+          <span class="line">Marconi</span>
+        </h1>
+        <p class="tag">Engineer • Innovator • Problem-solver</p>
+
+        <div class="cta-row">
+          <a class="btn btn-outline" href="work.html" data-nav>LOOK</a>
+          <nav class="inline-nav" aria-label="Sections">
+            <a href="work.html" data-nav>WORK</a>
+            <span class="sep">•</span>
+            <a href="about.html" data-nav>ABOUT</a>
+            <span class="sep">•</span>
+            <a href="contact.html" data-nav>CONTACT</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="glow"></div>
+        <img src="assets/sisyphus-hero.png" alt="Sisyphus pushing a stone" class="hero-img" />
+        <div class="reticle" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="divider container" aria-hidden="true">
+      <div class="rule"></div>
+    </section>
+
+    <section class="container">
+      <p class="muted">Scroll or use the menu to explore.</p>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <small>© <span id="year"></span> Mal Marconi — All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
