@@ -73,8 +73,8 @@ window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') setNav(false);
       img.classList.add('entered');
     }
     // Slower, staged typing
-    await type(first, first.dataset.text, 130, 250);  // "Mal"
-    await type(last,  last.dataset.text, 120, 180);  // "Marconi"
+    await type(first, first.dataset.text, 330, 450);  // "Mal"
+    await type(last,  last.dataset.text, 320, 380);  // "Marconi"
   };
 
   run();
