@@ -8,11 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-
 </head>
 <body>
   <canvas id="matrix" class="bg-canvas" aria-hidden="true"></canvas>
 
+  <!-- Fixed hamburger + drawer -->
   <button class="menu edge right" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
     <span></span><span></span><span></span>
   </button>
@@ -33,7 +33,73 @@
 
   <main class="container page">
     <h1 class="page-title">Portfolio</h1>
-    <p>Case studies coming soon.</p>
+
+    <!-- Controls -->
+    <div class="portfolio-controls">
+      <input id="proj-search" class="input" type="search" placeholder="Search projects, e.g. AKS, B2C, Grafana…" />
+      <div class="tag-pills" id="tag-pills">
+        <!-- Click to toggle filters; add/remove as needed -->
+        <button class="pill" data-tag="aks">AKS</button>
+        <button class="pill" data-tag="azure">Azure</button>
+        <button class="pill" data-tag="b2c">B2C</button>
+        <button class="pill" data-tag="dast">DAST</button>
+        <button class="pill" data-tag="grafana">Grafana</button>
+        <button class="pill" data-tag="elk">ELK</button>
+        <button class="pill" data-tag="ci-cd">CI/CD</button>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <section class="projects-grid" id="projects">
+      <!-- Card template to copy/paste for each article/project -->
+      <article class="project-card" data-tags="azure aks ci-cd" data-title="AKS Blue/Green with GitVersion & Vercel">
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          <div class="project-meta">
+            <span class="badge">AKS</span>
+            <span class="badge">CI/CD</span>
+            <span class="date">2025-07</span>
+          </div>
+          <h3 class="project-title">AKS Blue/Green with GitVersion & Vercel</h3>
+          <p class="project-desc">Automated semantic tagging, tag-only prod deploys, and blue/green strategy across multiple AKS clusters.</p>
+        </a>
+      </article>
+
+      <article class="project-card" data-tags="azure b2c" data-title="Azure AD B2C JIT Migration">
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          <div class="project-meta">
+            <span class="badge">Azure</span>
+            <span class="badge">B2C</span>
+            <span class="date">2025-05</span>
+          </div>
+          <h3 class="project-title">Azure AD B2C JIT Migration</h3>
+          <p class="project-desc">Custom policies + REST API for just-in-time user migration; Graph extension claims to map legacy UUIDs.</p>
+        </a>
+      </article>
+
+      <article class="project-card" data-tags="dast ci-cd" data-title="OWASP ZAP in Azure DevOps">
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          <div class="project-meta">
+            <span class="badge">DAST</span>
+            <span class="badge">CI/CD</span>
+            <span class="date">2025-07</span>
+          </div>
+          <h3 class="project-title">OWASP ZAP in Azure DevOps</h3>
+          <p class="project-desc">Pipeline-integrated scans with sidecar reports, PDF evidence, Slack/Jira notifications, and failure gates.</p>
+        </a>
+      </article>
+
+      <article class="project-card" data-tags="grafana elk azure" data-title="Network Observability with Grafana & Loki">
+        <a href="#" class="project-link" target="_blank" rel="noopener">
+          <div class="project-meta">
+            <span class="badge">Grafana</span>
+            <span class="badge">ELK</span>
+            <span class="date">2025-08</span>
+          </div>
+          <h3 class="project-title">Network Observability with Grafana & Loki</h3>
+          <p class="project-desc">Latency, error rate, NSG flow logs, and pod traffic visualizations prepared as audit evidence.</p>
+        </a>
+      </article>
+    </section>
   </main>
 
   <footer class="container footer">
@@ -41,5 +107,35 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Lightweight search + tag filter
+    (function(){
+      const search = document.getElementById('proj-search');
+      const pills = document.getElementById('tag-pills');
+      const cards = Array.from(document.querySelectorAll('.project-card'));
+      const active = new Set();
+
+      function apply(){
+        const q = (search.value || '').trim().toLowerCase();
+        cards.forEach(card => {
+          const title = card.dataset.title.toLowerCase();
+          const tags = card.dataset.tags.toLowerCase();
+          const matchText = !q || title.includes(q) || tags.includes(q);
+          const matchTags = active.size === 0 || [...active].every(t => tags.includes(t));
+          card.style.display = (matchText && matchTags) ? '' : 'none';
+        });
+      }
+
+      search.addEventListener('input', apply);
+      pills.addEventListener('click', (e)=>{
+        const b = e.target.closest('.pill'); if (!b) return;
+        const t = b.dataset.tag;
+        if (active.has(t)) { active.delete(t); b.classList.remove('on'); }
+        else { active.add(t); b.classList.add('on'); }
+        apply();
+      });
+      apply();
+    })();
+  </script>
 </body>
 </html>
