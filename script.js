@@ -73,8 +73,8 @@ window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') setNav(false);
       img.classList.add('entered');
     }
     // Slower, staged typing
-    await type(first, first.dataset.text, 330, 450);  // "Mal"
-    await type(last,  last.dataset.text, 320, 380);  // "Marconi"
+    await type(first, first.dataset.text, 300, 400);  // "Mal"
+    await type(last,  last.dataset.text, 250, 300);  // "Marconi"
   };
 
   run();
@@ -103,15 +103,16 @@ if (hero && imgTilt) {
   });
 }
 
-// Matrix background (slowed, light)
+// Matrix background (light theme, slow & subtle)
 (function matrixBackground(){
   const canvas = document.getElementById('matrix');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
+
   let w, h, fontSize, columns, drops;
   const chars = '01';
-  const SPEED_DIVISOR = 2;
+  const SPEED_DIVISOR = 3; // bigger = slower
 
   function resize(){
     w = canvas.clientWidth = window.innerWidth;
@@ -119,7 +120,8 @@ if (hero && imgTilt) {
     canvas.width = w * DPR;
     canvas.height = h * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    fontSize = Math.max(12, Math.floor(w / 100));
+
+    fontSize = Math.max(12, Math.floor(w / 100));   // size of digits
     columns = Math.ceil(w / fontSize);
     drops = Array.from({ length: columns }, () => Math.floor(Math.random() * h / fontSize));
     ctx.font = fontSize + 'px monospace';
@@ -130,9 +132,13 @@ if (hero && imgTilt) {
   let frame = 0;
   function draw(){
     frame++;
-    ctx.fillStyle = 'rgba(247, 247, 245, 0.07)'; // light trail
+    // very light trail so digits “ghost” away
+    ctx.fillStyle = 'rgba(247,247,245,0.05)';
     ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = 'rgba(0, 170, 140, 0.18)';   // subtle teal digits
+
+    // digit color — a bit stronger for visibility on pearl background
+    ctx.fillStyle = 'rgba(0, 140, 120, 0.28)';
+
     for (let i = 0; i < drops.length; i++) {
       const text = chars[Math.floor(Math.random() * chars.length)];
       const x = i * fontSize;
