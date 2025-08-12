@@ -178,3 +178,34 @@ p{margin:.25rem 0 1rem; color:var(--muted); line-height:1.6}
 
 @media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 640px)  { .projects-grid { grid-template-columns: 1fr; } }
+
+/* --- Typewriter headings --- */
+.type-target{
+  display:block;
+  min-height:1em;                 /* prevents layout shift before typing */
+  font-family: Cinzel, serif;
+  position:relative;
+  white-space:nowrap;
+  border-right: .1em solid transparent;
+}
+.type-target.typing{ border-color: var(--ink); }
+@keyframes caret-blink{ 50% { border-color: transparent; } }
+.type-target.typing{ animation: caret-blink 1s steps(1,end) infinite; }
+
+/* --- Hero image entrance --- */
+.hero-visual .hero-img{
+  opacity:0;
+  transform: translateY(10px) scale(.98);
+  transition: transform .8s cubic-bezier(.2,.8,.2,1), opacity .8s ease;
+  will-change: transform, opacity;
+}
+.page-ready .hero-visual .hero-img.entered{
+  opacity:1;
+  transform: translateY(0) scale(1);
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce){
+  .type-target{ animation:none !important; border-right:0; }
+  .hero-visual .hero-img{ transition:none; opacity:1; transform:none; }
+}

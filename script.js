@@ -27,8 +27,8 @@ const drawer = document.getElementById('drawer');
 const scrim = document.querySelector('.scrim');
 function setNav(open){
   body.classList.toggle('nav-open', open);
-  menuBtn.setAttribute('aria-expanded', String(open));
-  drawer.setAttribute('aria-hidden', String(!open));
+  if (menuBtn) menuBtn.setAttribute('aria-expanded', String(open));
+  if (drawer) drawer.setAttribute('aria-hidden', String(!open));
 }
 menuBtn?.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
 scrim?.addEventListener('click', () => setNav(false));
@@ -38,10 +38,51 @@ drawer?.addEventListener('click', (e)=>{
 });
 window.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') setNav(false); });
 
-// Tilt effect
+// --- Typewriter for "Mal Marconi" + hero image entrance ---
+(function typewriterAndEntrance(){
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const first = document.getElementById('first-name');
+  const last  = document.getElementById('last-name');
+  const img   = document.querySelector('.hero-visual .hero-img');
+
+  if (!first || !last || !img) return;
+
+  const type = (el, text, speed=70, delay=0) =>
+    new Promise(resolve=>{
+      if (reduceMotion){ el.textContent = text; return resolve(); }
+      el.classList.add('typing');
+      setTimeout(()=>{
+        let i = 0;
+        const step = () =>{
+          el.textContent = text.slice(0, i++);
+          if (i <= text.length){ requestAnimationFrame(step); }
+          else { el.classList.remove('typing'); resolve(); }
+        };
+        // slower than RAF alone for readability
+        const tick = ()=>{ step(); if (i <= text.length) setTimeout(tick, speed); };
+        tick();
+      }, delay);
+    });
+
+  const run = async ()=>{
+    // Start image entrance a moment after load
+    if (!reduceMotion){
+      setTimeout(()=> img.classList.add('entered'), 350);
+    } else {
+      img.classList.add('entered');
+    }
+    // Type names sequentially
+    await type(first, first.dataset.text, 75, 150);
+    await type(last,  last.dataset.text, 65, 150);
+  };
+
+  run();
+})();
+
+// Tilt effect on hero (kept from your existing code)
 const hero = document.querySelector('.hero-visual');
-const img = document.querySelector('.hero-img');
-if (hero && img) {
+const imgTilt = document.querySelector('.hero-img');
+if (hero && imgTilt) {
   let rect;
   const updateRect = () => (rect = hero.getBoundingClientRect());
   updateRect();
@@ -52,10 +93,12 @@ if (hero && img) {
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     const rotY = x * 12;
     const rotX = -y * 8;
-    img.style.transform = `perspective(1000px) rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(8px)`;
+    imgTilt.style.transform =
+      `perspective(1000px) rotateY(${rotY}deg) rotateX(${rotX}deg) translateZ(8px)`;
   });
   hero.addEventListener('mouseleave', () => {
-    img.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
+    imgTilt.style.transform =
+      'perspective(1000px) rotateY(0deg) rotateX(0deg) translateZ(0)';
   });
 }
 
@@ -89,9 +132,10 @@ if (hero && img) {
   let frame = 0;
   function draw(){
     frame++;
-    ctx.fillStyle = 'rgba(17, 18, 22, 0.08)';
+    // VERY light trail for your pearly theme
+    ctx.fillStyle = 'rgba(247, 247, 245, 0.07)';  // was dark; now soft light
     ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = 'rgba(0, 255, 160, 0.20)';
+    ctx.fillStyle = 'rgba(0, 170, 140, 0.18)';    // subtle teal digits
     for (let i = 0; i < drops.length; i++) {
       const text = chars[Math.floor(Math.random() * chars.length)];
       const x = i * fontSize;
