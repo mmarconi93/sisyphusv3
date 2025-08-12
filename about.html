@@ -8,11 +8,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-
 </head>
 <body>
   <canvas id="matrix" class="bg-canvas" aria-hidden="true"></canvas>
 
+  <!-- Right-edge hamburger + drawer -->
   <button class="menu edge right" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
     <span></span><span></span><span></span>
   </button>
@@ -33,7 +33,135 @@
 
   <main class="container page">
     <h1 class="page-title">About</h1>
-    <p>Short bio and mission statement.</p>
+
+    <p style="max-width: 72ch;">
+      I’m Mal Marconi, a DevOps Engineer with 5+ years building, shipping, and running systems in
+      both high-velocity startups and established enterprises. I currently serve as a DevOps Lead /
+      Manager, where I design platforms, coach engineers, and keep delivery moving without breaking
+      the guardrails. I like puzzles, I like pressure, and I love turning messy infrastructure into
+      boring, reliable pipelines.
+    </p>
+
+    <section class="grid-3" style="margin-top:1.2rem">
+      <article class="card">
+        <h3>What I do</h3>
+        <p>
+          End-to-end platform work across cloud, containers, and CI/CD. I automate everything I can,
+          and leave clear runbooks for what I can’t. I’m happiest when deployment risk trends down
+          and developer velocity trends up.
+        </p>
+      </article>
+      <article class="card">
+        <h3>Leadership & Mentoring</h3>
+        <p>
+          I’ve mentored several engineers from zero experience to hired. As a lead, I focus on
+          crisp interfaces, paved-road tooling, and humane on-call. I believe in pairing, small PRs,
+          and measurable feedback loops.
+        </p>
+      </article>
+      <article class="card">
+        <h3>Outside Work</h3>
+        <p>
+          Brazilian jiu-jitsu 3–4x/week keeps me honest about continuous improvement. I’m married,
+          I like hard problems, and I’m partial to elegant solutions with boring operations.
+        </p>
+      </article>
+    </section>
+
+    <section class="divider" aria-hidden="true"><div class="rule"></div></section>
+
+    <section>
+      <h2>Highlights</h2>
+      <ul>
+        <li>Built multi-cloud CI/CD pipelines for apps and ML/LLM workloads (canary/blue-green, tag-only deploys, env promotion).</li>
+        <li>Hardened ingress (WAF, App Gateway) and traffic policy; delivered SOC 2 & GDPR controls with auditable evidence trails.</li>
+        <li>Kubernetes platforms with Helm-based deployments, secrets management, and GitOps workflows.</li>
+        <li>Observability with Prometheus/Grafana/Loki (plus ELK) — SLOs, alerts, and dashboards developers actually use.</li>
+        <li>Integrated DAST into pipelines (OWASP ZAP), auto-publishing reports and gating merges on severity thresholds.</li>
+      </ul>
+    </section>
+
+    <section class="divider" aria-hidden="true"><div class="rule"></div></section>
+
+    <section>
+      <h2>Core Stack</h2>
+      <p class="muted" style="margin-top:.25rem">Clouds, platforms, data, and tooling I use regularly.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.8rem;">
+        <!-- Clouds -->
+        <span class="badge">Azure</span>
+        <span class="badge">AWS</span>
+        <span class="badge">GCP</span>
+        <!-- Platform -->
+        <span class="badge">Kubernetes</span>
+        <span class="badge">Helm</span>
+        <span class="badge">Docker</span>
+        <!-- IaC -->
+        <span class="badge">Terraform / HCL</span>
+        <span class="badge">CloudFormation</span>
+        <span class="badge">Ansible</span>
+        <!-- Langs -->
+        <span class="badge">Python</span>
+        <span class="badge">Java</span>
+        <span class="badge">YAML</span>
+        <!-- Data -->
+        <span class="badge">PostgreSQL</span>
+        <span class="badge">MySQL</span>
+        <span class="badge">NoSQL</span>
+        <span class="badge">Elasticsearch</span>
+        <span class="badge">Neo4j</span>
+        <!-- ML/LLM -->
+        <span class="badge">ML Pipelines</span>
+        <span class="badge">LLMs</span>
+        <!-- CI/CD -->
+        <span class="badge">Azure DevOps</span>
+        <span class="badge">GitHub / GitLab</span>
+        <span class="badge">Jenkins</span>
+        <span class="badge">CircleCI</span>
+        <span class="badge">Bitbucket</span>
+        <!-- Net/Edge -->
+        <span class="badge">WAF</span>
+        <span class="badge">App Gateway</span>
+        <!-- Observability -->
+        <span class="badge">Prometheus</span>
+        <span class="badge">Grafana</span>
+        <span class="badge">Loki</span>
+        <span class="badge">Promtail</span>
+        <!-- Messaging/Storage -->
+        <span class="badge">Kafka</span>
+        <span class="badge">Blob Storage</span>
+        <span class="badge">S3</span>
+        <!-- OS -->
+        <span class="badge">Linux</span>
+        <span class="badge">On-prem DC</span>
+      </div>
+    </section>
+
+    <section class="divider" aria-hidden="true"><div class="rule"></div></section>
+
+    <section>
+      <h2>Mentoring</h2>
+      <p>
+        I run 1:1 sessions on fundamentals, interviews, and real-world delivery. Several mentees
+        have gone from zero to hired. If you’re switching careers or leveling up into DevOps/Platform,
+        I can help you prioritize the right projects.
+      </p>
+      <p>
+        Interested? Head to <a href="mentoring.html" data-nav>Mentoring</a> or <a href="contact.html" data-nav>Contact</a>.
+      </p>
+    </section>
+
+    <section class="divider" aria-hidden="true"><div class="rule"></div></section>
+
+    <section>
+      <h2>What I’m looking for</h2>
+      <p>
+        Teams that value observability, automation, and continuous improvement; scope that mixes
+        platform engineering with mentoring; and problems where reliability and speed both matter.
+      </p>
+      <p style="margin-top:.6rem">
+        See selected work in the <a href="portfolio.html" data-nav>Portfolio</a>.
+      </p>
+    </section>
   </main>
 
   <footer class="container footer">
