@@ -209,3 +209,55 @@ p{margin:.25rem 0 1rem; color:var(--muted); line-height:1.6}
   .type-target{ animation:none !important; border-right:0; }
   .hero-visual .hero-img{ transition:none; opacity:1; transform:none; }
 }
+
+/* === Compact desktop layout on phones (keep 2 columns) === */
+
+/* iOS safe-area for the hamburger */
+.menu.edge.right{
+  top: calc(14px + env(safe-area-inset-top));
+  right: calc(16px + env(safe-area-inset-right));
+}
+
+/* Undo the old "stack to 1 column" rule under 900px */
+@media (max-width: 900px){
+  .hero{
+    grid-template-columns: .95fr 1.05fr;   /* keep 2 columns, text left / image right */
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    gap: 0.9rem;
+    padding: 0.8rem 0 1.4rem;
+  }
+  .brand{
+    /* smaller, but still elegant, to fit alongside the image */
+    font-size: clamp(1.6rem, 9vw, 2.6rem);
+    letter-spacing: .02em;
+    line-height: 1.05;
+  }
+  .tag{ font-size: clamp(.9rem, 2.8vw, 1rem); }
+  .cta-row{ gap: .7rem; flex-wrap: wrap; }
+  .btn{ padding: .75rem 1.1rem; }
+
+  /* Keep the Sisyphus image on the right and contained */
+  .hero-visual{
+    max-width: 320px;              /* tune: 280–340px */
+    margin: 0 0 0 auto;            /* push to the right edge of grid */
+  }
+  .hero-visual .hero-img{ object-fit: contain; }
+
+  /* So the two columns don’t get squeezed too hard on very small widths */
+  .container{ width: 94%; }
+}
+
+/* Extra small phones: still two columns, but tighter */
+@media (max-width: 600px){
+  .hero{
+    grid-template-columns: 1fr 1fr;  /* equal columns */
+    gap: 0.7rem;
+  }
+  .brand{ font-size: clamp(1.4rem, 10vw, 2.2rem); }
+  .hero-visual{ max-width: min(45vw, 260px); }
+  .reticle{ display:none; }          /* optional: declutter small screens */
+}
+
+/* Make sure the Matrix canvas stays subtle on bright backgrounds */
+.bg-canvas{ opacity: .14; } /* bump up/down between .10 – .22 to taste */
